@@ -6965,6 +6965,9 @@ html[lang="en"] .pb-book-wrap { --ring: linear-gradient(to right, rgba(158,41,31
 .lead-card-head h3 { margin: 0 0 4px; font-size: 20px; font-weight: 800; color: var(--text-color); }
 .lead-card-head p { margin: 0; font-size: 13px; color: var(--text-color); }
 .lead-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+/* منطقة من غير فروع (الدمام): خانة الخدمة بس بعرض كامل */
+.lead-grid.no-branch { grid-template-columns: minmax(0, 1fr); }
+.lead-grid.no-branch > .lead-field:first-child { display: none; }
 .lead-field { display: flex; flex-direction: column; gap: 8px; }
 .lead-field > label, .lead-label { font-size: 14px; font-weight: 700; color: var(--text-color); }
 .lead-req { color: var(--brand-red); }

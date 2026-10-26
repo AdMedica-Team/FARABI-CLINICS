@@ -1200,7 +1200,7 @@
         'فرع ضاحية لبن', 'الفرع الرئيسي', 'فرع طويق'
       ],
       madinah: ['فرع الأندلس', 'فرع الهجرة', 'فرع قباء – بسمة الفارابي', 'فرع ساري', 'فرع سلطانة – القبلتين'],
-      dammam:  ['فرع الدمام'],
+      dammam:  [],
       khamis:  ['فرع القطيف الرئيسي', 'فرع القطيف الجديد', 'فرع شمس الفارابي – عنك', 'فرع خميس مشيط']
     };
     /* خدمات كل فرع، مقسمة بالمدينة (فيه فروع بنفس الاسم في أكتر من مدينة)
@@ -1218,6 +1218,8 @@
       'تنظيف أسنان + تلميع أسنان', 'عدسات الأسنان الفينير للسن الواحد', 'زراعة أسنان ألمانية',
       'حشوة تجميلية', 'قوالب التبييض المنزلي'
     ];
+    /* مناطق من غير فروع: الخدمات بتظهر على طول وخانة الفرع بتختفي */
+    const REGION_SERVICES = { dammam: DAMMAM_SERVICES };
     const BRANCH_SERVICES = {
       riyadh: {
         'فرع الأبراج':  DENTAL_FULL,
@@ -1266,9 +1268,6 @@
         'فرع ساري': DENTAL_FULL.filter(s => s !== 'جراحة الفم والوجه والفكين'),
         'فرع سلطانة – القبلتين': [...DENTAL_FULL, 'الجلدية والتجميل']
       },
-      dammam: {
-        'فرع الدمام': DAMMAM_SERVICES
-      },
       khamis: {
         'فرع القطيف الرئيسي': [
           'طب الأسنان العام', 'تقويم الأسنان', 'طب أسنان الأطفال', 'جراحة الفم والوجه والفكين'
@@ -1290,12 +1289,16 @@
 
     function fillServices() {
       const region = form.querySelector('input[name="region"]:checked').value;
-      const list = BRANCH_SERVICES[region]?.[branch.value] || DEFAULT_SERVICES;
+      const list = REGION_SERVICES[region] || BRANCH_SERVICES[region]?.[branch.value] || DEFAULT_SERVICES;
       service.innerHTML = '<option value="" disabled selected>اختر الخدمة</option>' +
         list.map(s => `<option>${s}</option>`).join('');
     }
     function fillBranches() {
       const region = form.querySelector('input[name="region"]:checked').value;
+      const noBranches = !BRANCHES[region].length;
+      branch.closest('.lead-grid').classList.toggle('no-branch', noBranches);
+      branch.closest('.lead-field').classList.remove('has-error');
+      branch.disabled = noBranches;
       branch.innerHTML = '<option value="" disabled selected>اختر الفرع</option>' +
         BRANCHES[region].map(b => `<option>${b}</option>`).join('');
       fillServices();
@@ -1313,7 +1316,7 @@
     const rules = {
       leadName:    el => el.value.trim().length >= 2,
       leadEmail:   el => !el.value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()),
-      leadBranch:  el => !!el.value,
+      leadBranch:  el => el.disabled || !!el.value,
       leadService: el => !!el.value,
       leadPhone:   el => /^5\d{8}$/.test(el.value.replace(/\D/g, ''))
     };
