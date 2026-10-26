@@ -333,33 +333,29 @@
   .hmag-spine {
     position: absolute;
     left: 50%; top: 0; bottom: 0;
-    width: 24%;
+    width: 8%;
     transform: translateX(-50%);
-    /* نفس ثنية مجلة آراء العملاء: تدرج واسع يحاكي انحناء الورق عند الكعب */
+    /* ثنية خفيفة: ظل ضيق وهادي عند الكعب */
     background: linear-gradient(to right,
       transparent        0%,
-      rgba(0,0,0,0.06)  10%,
-      rgba(0,0,0,0.22)  28%,
-      rgba(0,0,0,0.52)  42%,
-      rgba(0,0,0,0.78)  48%,
-      rgba(0,0,0,0.88)  50%,
-      rgba(0,0,0,0.78)  52%,
-      rgba(0,0,0,0.52)  58%,
-      rgba(0,0,0,0.22)  72%,
-      rgba(0,0,0,0.06)  90%,
+      rgba(0,0,0,0.04)  20%,
+      rgba(0,0,0,0.14)  40%,
+      rgba(0,0,0,0.24)  50%,
+      rgba(0,0,0,0.14)  60%,
+      rgba(0,0,0,0.04)  80%,
       transparent       100%);
     z-index: 10;
     pointer-events: none;
   }
-  /* خط مركزي يعطي إحساس الثنية الحادة */
+  /* خط مركزي رفيع يعطي إحساس الثنية */
   .hmag-spine::after {
     content: '';
     position: absolute;
     left: 50%; top: 0; bottom: 0;
-    width: 2px;
+    width: 1px;
     transform: translateX(-50%);
     background: linear-gradient(to bottom,
-      rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.80) 50%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0.30) 100%);
+      rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.25) 20%, rgba(0,0,0,0.32) 50%, rgba(0,0,0,0.25) 80%, rgba(0,0,0,0.10) 100%);
   }
 
   .hmag-controls {
@@ -387,7 +383,7 @@
   }
   @media (max-width: 599px) {
     .hmag-frame { padding: 12px 22px 10px; border-radius: 8px; }
-    .hmag-spine { width: 18%; }
+    .hmag-spine { width: 8%; }
     .hmag-controls .pb-btn { width: 34px; height: 34px; }
   }
   /* ── الموبايل: صفحة واحدة بصور الموبايل (750×1000) ── */
