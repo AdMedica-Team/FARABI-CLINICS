@@ -7008,7 +7008,7 @@ html[lang="en"] .pb-book-wrap { --ring: linear-gradient(to right, rgba(158,41,31
 
 /* المنطقة: segmented control */
 .lead-regions {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px;
   padding: 4px; border-radius: 12px; background: #F4EDDA;
 }
 .lead-region { position: relative; cursor: pointer; }
@@ -7068,6 +7068,7 @@ html[lang="en"] .pb-book-wrap { --ring: linear-gradient(to right, rgba(158,41,31
   .lead-section { margin: 0 8px 3rem; padding: 28px 14px; }
   .lead-card { padding: 22px 16px; gap: 18px; }
   .lead-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .lead-regions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lead-region span { font-size: 12.5px; min-height: 48px; padding: 4px; }
   .lead-perks li, .lead-contact a { font-size: 14px; }
 }
