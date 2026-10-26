@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيادات الفارابي | Farabi Clinics</title>
+<link rel="stylesheet" href="assets/css/style.css?v=147"/>
+<style>
+  /* ── Dropdown ── */
+  .nav-has-drop { position:relative; display:flex; align-items:center; gap:1px; }
+  .nav-dropdown {
+    display:none; position:absolute; top:calc(100% + 10px); right:0;
+    background:#EDF8F5; border-radius:14px; min-width:240px;
+    box-shadow:0 8px 32px rgba(30, 100, 82,0.14); border:1.5px solid rgba(22,67,70,0.18);
+    z-index:9999; padding:8px 0; overflow:hidden;
+  }
+  .nav-has-drop:hover .nav-dropdown,
+  .nav-has-drop:focus-within .nav-dropdown,
+  .nav-has-drop.drop-open .nav-dropdown { display:block; }
+  .nav-dropdown-header {
+    font-size:11px; font-weight:700; color:#164346; letter-spacing:1px;
+    padding:10px 18px 6px; border-bottom:1px solid rgba(22,67,70,0.15); margin-bottom:4px;
+  }
+  .nav-dropdown a {
+    display:block; padding:9px 18px; font-size:12px; font-weight:600;
+    color:#3a2e28; text-decoration:none; border-bottom:1px solid rgba(22,67,70,0.07);
+    transition:background 0.2s, color 0.2s, padding-right 0.2s; position:relative;
+  }
+  .nav-dropdown a:last-child { border-bottom:none; }
+  .nav-dropdown a:hover { background:rgba(229,249,243,0.35); color:#164346; padding-right:22px; }
+  .nav-dropdown a::before {
+    content:''; position:absolute; right:10px; top:50%; transform:translateY(-50%);
+    width:4px; height:4px; border-radius:50%; background:#C3DAD3; transition:background 0.2s;
+  }
+  .nav-dropdown a:hover::before { background:#164346; }
+  .drop-toggle {
+    background:none; border:none; cursor:pointer; font-size:11px;
+    color:#5d5e5c; padding:2px 3px; line-height:1; transition:transform 0.25s;
+  }
+  .nav-has-drop.drop-open .drop-toggle { transform:rotate(180deg); }
+  /* ── Hero — RTL: نص على اليمين في كل المقاسات من 530px لفوق ── */
+  @media (min-width: 530px) {
+    .hero-wrapper {
+      justify-content: flex-start;
+    }
+    .hero-slides {
+      transform: scaleX(-1);
+    }
+    .hero-overlay {
+      background: linear-gradient(
+        to left,
+        rgba(0,0,0,0.72) 0%,
+        rgba(0,0,0,0.50) 38%,
+        rgba(0,0,0,0.10) 62%,
+        rgba(0,0,0,0.00) 100%
+      );
+    }
+  }
+
+  /* ── Testimonials — RTL: panel (يسار), كتاب (يمين) ── */
+
+  /* CTA panel: extend outward (left) and overlap into book (right) */
+  .testi-cta-side {
+    margin-left:  -60px;
+    margin-right: -60px;
+    padding: 20px 60px 4px 60px;
+    z-index: 1;
+  }
+
+  /* Book wrap: natural size, above CTA panel */
+  .pb-stage .pb-book-wrap {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    align-items: flex-end;
+    margin-right: 0px;
+  }
+
+  /* Book clip-wrap: extend slightly past container right edge */
+  #pbClipWrap {
+    margin: 0 -55px 14px 0;
+    transform: translateX(-80px);
+  }
+
+  /* Separator: RTL gradient (gold on right → transparent on left) */
+  .testi-cta-sep {
+    background: linear-gradient(to left, #164346, transparent);
+  }
+
+  /* Quote block: RTL — quote mark sits on the right */
+  .testi-cta-quote-block {
+    padding-right: 18px;
+    padding-left: 0;
+  }
+
+  /* ── max-width 529px: column layout (book on top, CTA below) ── */
+  @media (max-width: 529px) {
+    .pb-stage      { flex-direction: column !important; align-items: stretch; gap: 0; overflow: hidden; }
+    .pb-stage .pb-book-wrap { order: 1; flex: 0 0 auto !important; width: 100%; border-radius: 14px 14px 0 0 !important; align-items: center; overflow: hidden; }
+    .testi-cta-side {
+      order: 2;
+      flex: 0 0 auto !important;
+      width: 100%;
+      height: auto !important;
+      min-height: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 20px 16px 48px;
+      border-radius: 0 0 14px 14px !important;
+      overflow: visible;
+    }
+    #pbClipWrap { margin: 0 0 6px 0; display: flex; justify-content: center; transform: translateX(-50px); }
+    .pb-controls { margin: 0 auto; width: 115px; }
+    #pbClipWrap.expanded ~ .pb-controls { width: 230px; }
+  }
+  /* ── Force column for 400–529px ── */
+  @media (min-width: 400px) and (max-width: 529px) {
+    .testimonials .pb-stage { flex-direction: column !important; }
+    .testimonials .testi-cta-side {
+      order: 2 !important;
+      flex: 0 0 auto !important;
+      width: 100% !important;
+      height: auto !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      border-radius: 0 0 14px 14px !important;
+    }
+  }
+
+  /* ── 530–767px: row ── */
+  @media (min-width: 530px) and (max-width: 767px) {
+    .pb-stage      { flex-direction: row !important; overflow: hidden; align-items: stretch; }
+    .pb-book-wrap  { overflow: hidden; align-items: center; }
+    .testi-cta-side .btn-about-primary   { font-size: 10px; padding: 6px 12px; white-space: nowrap; }
+    .testi-cta-side .btn-about-secondary { font-size: 10px; white-space: nowrap; }
+    .testi-cta-side .about-btns { gap: 6px; flex-wrap: wrap; align-items: center; }
+    .testi-cta-side .btn-about-secondary .play-icon { width: 22px; height: 22px; border-width: 1.5px; }
+    .testi-cta-side .btn-about-secondary .play-icon svg { width: 9px; height: 9px; }
+    #pbClipWrap { margin: 0 0 10px 0; display: flex; justify-content: center; transform: none; }
+    .pb-controls { margin: 0 auto; width: 144px; }
+    #pbClipWrap.expanded ~ .pb-controls { width: 288px; }
+  }
+
+  /* ── 530–599px: خط أصغر لشاشات الموبايل الصغيرة ── */
+  @media (min-width: 530px) and (max-width: 599px) {
+    .testi-cta-side {
+      margin-left:  0;
+      margin-right: 0;
+      padding: 10px 12px 8px 12px;
+    }
+    .testi-cta-title     { font-size: 0.92rem; line-height: 1.2; }
+    .testi-quote-mark    { font-size: 1.6rem; margin-bottom: -3px; }
+    .testi-quote-text    { font-size: 0.85rem; line-height: 1.45; }
+    .testi-contact-label { font-size: 0.82rem; line-height: 1.35; margin-bottom: 1px; }
+    .testi-phone-num     { font-size: 0.90rem; letter-spacing: 0; }
+    .testi-cta-closing   { font-size: 0.82rem; }
+    .testi-cta-side .about-btns                              { gap: 4px; margin-top: 0; }
+    .testi-cta-side .btn-about-primary                       { font-size: 11px; padding: 4px 8px; }
+    .testi-cta-side .btn-about-secondary                     { font-size: 11px; gap: 3px; }
+    .testi-cta-side .btn-about-secondary .play-icon          { width: 18px; height: 18px; }
+    .testi-cta-side .btn-about-secondary .play-icon svg      { width: 7px; height: 7px; }
+  }
+
+  /* ── 600–767px: تقليل الخط والـ padding ── */
+  @media (min-width: 600px) and (max-width: 767px) {
+    .testi-cta-side {
+      margin-left:  0;
+      margin-right: 0;
+      padding: 12px 14px 10px 14px;
+    }
+    .testi-cta-title     { font-size: 0.88rem; line-height: 1.2; }
+    .testi-quote-mark    { font-size: 2.0rem; margin-bottom: -4px; }
+    .testi-quote-text    { font-size: 0.90rem; line-height: 1.5; }
+    .testi-contact-label { font-size: 0.88rem; line-height: 1.35; margin-bottom: 1px; }
+    .testi-phone-num     { font-size: 0.95rem; letter-spacing: 0; }
+    .testi-cta-closing   { font-size: 0.88rem; }
+    .testi-cta-side .about-btns       { gap: 5px; flex-wrap: wrap; margin-top: 2px; }
+    .testi-cta-side .btn-about-primary  { font-size: 11px; padding: 5px 10px; white-space: nowrap; }
+    .testi-cta-side .btn-about-secondary { font-size: 11px; gap: 3px; white-space: nowrap; }
+    .testi-cta-side .btn-about-secondary .play-icon     { width: 20px; height: 20px; }
+    .testi-cta-side .btn-about-secondary .play-icon svg { width: 8px; height: 8px; }
+  }
+
+  /* ── 768–960px ── */
+  @media (min-width: 768px) and (max-width: 960px) {
+    .testi-cta-side {
+      padding: 16px 18px 14px 18px;
+      margin-left: 0;
+      margin-right: 0;
+      border-radius: 20px 0 0 20px;
+    }
+    .testi-quote-mark    { font-size: 2.4rem; margin-bottom: -4px; }
+    .testi-quote-text    { font-size: 0.93rem; line-height: 1.6; }
+    .testi-cta-title     { font-size: 0.78rem; line-height: 1.2; }
+    .testi-contact-label { font-size: 0.88rem; line-height: 1.4; }
+    .testi-phone-num     { font-size: 0.78rem; letter-spacing: 0; }
+    .testi-cta-closing   { font-size: 0.90rem; }
+    .testi-cta-side .btn-about-primary   { font-size: 10px; padding: 6px 12px; white-space: nowrap; }
+    .testi-cta-side .btn-about-secondary { font-size: 10px; gap: 5px; white-space: nowrap; }
+    .testi-cta-side .about-btns { gap: 6px; flex-wrap: wrap; }
+    #pbClipWrap    { margin: 12px 0 24px 0; }
+    .pb-controls   { margin-left: 0; width: 173px; }
+    #pbClipWrap.expanded ~ .pb-controls { width: 346px; }
+  }
+
+  /* ── 961–1280px ── */
+  @media (min-width: 961px) and (max-width: 1280px) {
+    .testi-cta-side { margin-left: 0; margin-right: 0; border-radius: 20px 0 0 20px; }
+    #pbClipWrap    { margin: 16px 0 30px 0; }
+    .pb-controls   { margin-left: 0; width: 209px; }
+    #pbClipWrap.expanded ~ .pb-controls { width: 418px; }
+  }
+
+  /* ── 1600px+ ── */
+  @media (min-width: 1600px) {
+    .testi-cta-side { margin-left: 0 !important; margin-right: 0; }
+    #pbClipWrap     { margin: 40px 0 60px 0; }
+    .pb-controls    { margin-left: 0; }
+  }
+
+  /* ── 1920px+ ── */
+  @media (min-width: 1920px) {
+    .testi-cta-side { margin-left: 0 !important; margin-right: 0; }
+    #pbClipWrap     { margin: 40px -15px 60px 0; }
+    .pb-controls    { margin-left: -15px; }
+  }
+
+  /* ── Hero mobile override ── */
+  @media (max-width: 960px) {
+    .hero-overlay { background: transparent !important; }
+    .hero-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.0) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    html body .hero-wrapper .hero-content {
+      position: absolute !important;
+      left: 0 !important; right: 0 !important;
+      top: auto !important; bottom: 80px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 16px 16px 22px !important;
+      justify-content: flex-end !important;
+      background: transparent !important;
+      transform: none !important;
+    }
+  }
+  @media (max-width: 480px) {
+    .about-title br { display: none; }
+    .about-title .about-gray,
+    .about-title .about-highlight { display: inline; }
+  }
+</style>
+  <style>
+  /* ══════════════════════════════════════
+     Hero Magazine — البانرات كصفحات مجلة
+  ══════════════════════════════════════ */
+  .hero.hero--magazine { padding-bottom: 30px; }
+  .hmag-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.70);
+    border-radius: 10px;  /* نفس هيئة المجلة: زوايا خفيفة مش مدوّرة */
+    padding: 28px 48px 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.85);
+  }
+  .hmag-book {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    aspect-ratio: 1920 / 800;
+    perspective: 2600px;
+    border-radius: 6px;
+    background: #1a0a04;
+    /* سُمك الصفحات على الجانبين */
+    box-shadow:
+      0 14px 40px rgba(0,0,0,0.28),
+      0  4px 12px rgba(0,0,0,0.18),
+       2px 0 0 0 #faf4ee,  4px 0 0 0 #eeddd0,  6px 0 0 0 #f5ece2,  8px 0 0 0 #e6d4c2,
+      10px 0 0 0 #f0e4d5, 12px 0 0 0 #dcc8b4, 14px 0 0 0 #e8d6c4, 16px 0 0 0 #c8aa94,
+      18px 0 0 0 #b89880, 20px 0 0 0 rgba(0,0,0,0.14),
+      -2px 0 0 0 #faf4ee, -4px 0 0 0 #eeddd0, -6px 0 0 0 #f5ece2, -8px 0 0 0 #e6d4c2,
+      -10px 0 0 0 #f0e4d5, -12px 0 0 0 #dcc8b4, -14px 0 0 0 #e8d6c4, -16px 0 0 0 #c8aa94,
+      -18px 0 0 0 #b89880, -20px 0 0 0 rgba(0,0,0,0.14);
+  }
+  .hmag-half, .hmag-leaf-face {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 50%;
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+  }
+  .hmag-half--l, .hmag-leaf-face.is-l { left: 0;  background-position: left center; }
+  .hmag-half--r, .hmag-leaf-face.is-r { left: 50%; background-position: right center; }
+  .hmag-half--l { border-radius: 6px 0 0 6px; }
+  .hmag-half--r { border-radius: 0 6px 6px 0; }
+
+  /* الورقة اللي بتتقلب */
+  .hmag-leaf {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 50%;
+    transform-style: preserve-3d;
+    z-index: 5;
+    visibility: hidden;
+  }
+  .hmag-leaf.on-r { left: 50%; transform-origin: left center; }
+  .hmag-leaf.on-l { left: 0;   transform-origin: right center; }
+  .hmag-leaf.is-flipping { visibility: visible; transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1); }
+  .hmag-leaf-face { left: 0 !important; width: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .hmag-leaf-back { transform: rotateY(180deg); }
+  /* ظل الانحناء على الورقة وهي بتتقلب */
+  .hmag-leaf-face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+  }
+  .hmag-leaf.on-r .hmag-leaf-front::after,
+  .hmag-leaf.on-l .hmag-leaf-back::after  { background: linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0) 60%); }
+  .hmag-leaf.on-l .hmag-leaf-front::after,
+  .hmag-leaf.on-r .hmag-leaf-back::after  { background: linear-gradient(to left,  rgba(0,0,0,0.45), rgba(0,0,0,0) 60%); }
+  .hmag-leaf.is-flipping .hmag-leaf-face::after { opacity: 1; }
+
+  /* ثنية المجلة في النص */
+  .hmag-spine {
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 24%;
+    transform: translateX(-50%);
+    /* نفس ثنية مجلة آراء العملاء: تدرج واسع يحاكي انحناء الورق عند الكعب */
+    background: linear-gradient(to right,
+      transparent        0%,
+      rgba(0,0,0,0.06)  10%,
+      rgba(0,0,0,0.22)  28%,
+      rgba(0,0,0,0.52)  42%,
+      rgba(0,0,0,0.78)  48%,
+      rgba(0,0,0,0.88)  50%,
+      rgba(0,0,0,0.78)  52%,
+      rgba(0,0,0,0.52)  58%,
+      rgba(0,0,0,0.22)  72%,
+      rgba(0,0,0,0.06)  90%,
+      transparent       100%);
+    z-index: 10;
+    pointer-events: none;
+  }
+  /* خط مركزي يعطي إحساس الثنية الحادة */
+  .hmag-spine::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.80) 50%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0.30) 100%);
+  }
+
+  .hmag-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  /* ديسكتوب: مجلة أكبر — هوامش أقل ومن غير حد أقصى للعرض */
+  @media (min-width: 961px) {
+    .hero.hero--magazine { padding-left: 16px !important; padding-right: 16px !important; }
+    .hero.hero--magazine .hmag-frame { padding: 22px 30px 16px; }
+    .hero.hero--magazine .hmag-book { max-width: none; }
+    /* صور العروض في About على نفس خط إطار المجلة (القيمة بيحسبها سكريبت) */
+    html[dir="rtl"] .about-inner.mosaic-aligned .about-mosaic { margin-left: var(--mosaic-edge) !important; }
+    html[dir="ltr"] .about-inner.mosaic-aligned .about-mosaic { margin-right: var(--mosaic-edge) !important; }
+    /* الهيدر بنفس عرض وزوايا إطار المجلة */
+    .navbar { margin-left: 16px !important; margin-right: 16px !important; border-radius: 10px; }
+  }
+  @media (max-width: 960px) {
+    .hmag-frame { padding: 18px 28px 14px; border-radius: 8px; }
+    .hmag-controls { margin-top: 14px; }
+  }
+  @media (max-width: 599px) {
+    .hmag-frame { padding: 12px 22px 10px; border-radius: 8px; }
+    .hmag-spine { width: 18%; }
+    .hmag-controls .pb-btn { width: 34px; height: 34px; }
+  }
+  /* ── الموبايل: صفحة واحدة بصور الموبايل (750×1000) ── */
+  @media (max-width: 1023px) {
+    .hero.hero--magazine { overflow-x: clip; }
+    .hmag-book.is-single {
+      width: min(100%, 420px, calc((100vh - 230px) * 0.75));
+      min-width: min(100%, 300px);
+      aspect-ratio: 750 / 1000;
+      perspective: 1800px;
+      border-radius: 4px 8px 8px 4px;
+      box-shadow:
+        0 12px 32px rgba(0,0,0,0.26), 0 3px 10px rgba(0,0,0,0.16),
+        2px 0 0 0 #faf4ee, 4px 0 0 0 #eeddd0, 6px 0 0 0 #f5ece2, 8px 0 0 0 #e6d4c2,
+        10px 0 0 0 #dcc8b4, 12px 0 0 0 #c8aa94, 14px 0 0 0 rgba(0,0,0,0.14);
+    }
+    [dir="rtl"] .hmag-book.is-single {
+      border-radius: 8px 4px 4px 8px;
+      box-shadow:
+        0 12px 32px rgba(0,0,0,0.26), 0 3px 10px rgba(0,0,0,0.16),
+        -2px 0 0 0 #faf4ee, -4px 0 0 0 #eeddd0, -6px 0 0 0 #f5ece2, -8px 0 0 0 #e6d4c2,
+        -10px 0 0 0 #dcc8b4, -12px 0 0 0 #c8aa94, -14px 0 0 0 rgba(0,0,0,0.14);
+    }
+    .hmag-book.is-single .hmag-half--r,
+    .hmag-book.is-single .hmag-spine,
+    .hmag-book.is-single .hmag-leaf-back { display: none; }
+    .hmag-book.is-single .hmag-half--l,
+    .hmag-book.is-single .hmag-leaf { left: 0; width: 100%; border-radius: inherit; }
+    .hmag-book.is-single .hmag-half--l,
+    .hmag-book.is-single .hmag-leaf-face { background-size: cover; background-position: center; }
+    .hmag-book.is-single .hmag-leaf { transform-origin: left center; }
+    [dir="rtl"] .hmag-book.is-single .hmag-leaf { transform-origin: right center; }
+    /* ظل الكعب على الصفحة وهي بتتلف */
+    .hmag-book.is-single .hmag-leaf-front::after { background: linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0) 55%); }
+    [dir="rtl"] .hmag-book.is-single .hmag-leaf-front::after { background: linear-gradient(to left, rgba(0,0,0,0.4), rgba(0,0,0,0) 55%); }
+  }
+  /* التابلت: مجلة مفتوحة على صفحتين، كل صفحة عرض طولي (750×1000)، ومحسوبة على ارتفاع الشاشة */
+  .hmag-book.is-pair {
+    aspect-ratio: 1500 / 1000;
+    width: min(100%, calc((100vh - 200px) * 1.5));
+    min-width: min(100%, 520px);
+    margin: 0 auto;
+  }
+  .hmag-book.is-pair .hmag-half,
+  .hmag-book.is-pair .hmag-leaf-face { background-size: cover !important; background-position: center !important; }
+  [dir="rtl"] .hmag-controls .pb-btn svg { transform: scaleX(-1); }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Top Bar -->
+  <div class="top-bar top-bar--simple">
+    <div class="tbs-inner">
+      <a class="tbs-item" href="tel:+966112027500"><span class="tbs-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 5c-4.2 0-8.1 1.2-10 3.3-.6.6-.6 1.5 0 2.1l1.6 1.6c.5.5 1.3.6 1.9.2l2.2-1.4c.5-.3.8-.8.8-1.4V8.2C9.6 7.8 10.8 7.6 12 7.6s2.4.2 3.5.6v1.2c0 .6.3 1.1.8 1.4l2.2 1.4c.6.4 1.4.3 1.9-.2l1.6-1.6c.6-.6.6-1.5 0-2.1C20.1 6.2 16.2 5 12 5z"/><path d="M8 13.5l1-1.5h6l1 1.5 2 3.5v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2z"/><circle cx="12" cy="16.5" r="1.6" fill="#fff"/></svg></span><span dir="ltr">0112027500</span></a>
+      <a class="tbs-item" href="mailto:info@farabiclinics.com"><span class="tbs-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><polyline points="3 6 12 13 21 6"/><line x1="3" y1="18" x2="9.5" y2="11.5"/><line x1="21" y1="18" x2="14.5" y2="11.5"/></svg></span><span dir="ltr">info@farabiclinics.com</span></a>
+      <span class="tbs-item"><span class="tbs-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="6.5"/><line x1="12" y1="1.5" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="22.5" y2="12"/></svg></span><span>الرياض-الدمام-المدينة</span></span>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <div class="logo">
+        <img src="assets/img/farabi-logo.png" alt="Farabi Clinics" class="logo-img">
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#top" class="active">الرئيسية</a></li>
+        <li><a href="#about">عن الفارابي</a></li>
+        <li><a href="#book">اتصل بنا</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#book" class="btn-book">احجز الآن</a>
+      </div>
+
+      <!-- Hamburger button — visible only on < 500px -->
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="القائمة" aria-expanded="false">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+          <path class="hb-line hb-line--1" d="M0 40h62c13 0 6 28-4 18L35 35"/>
+          <path class="hb-line hb-line--2" d="M0 50h70"/>
+          <path class="hb-line hb-line--3" d="M0 60h62c13 0 6-28-4-18L35 65"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav overlay — visible only on < 500px -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay">
+    <ul class="mobile-nav-links">
+      <li><a href="#top" class="active"><span class="mnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg></span><span class="mnav-text">الرئيسية</span><svg class="mnav-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></a></li>
+      <li><a href="#about"><span class="mnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.6" r="0.6" fill="currentColor"/></svg></span><span class="mnav-text">عن الفارابي</span><svg class="mnav-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></a></li>
+      <li><a href="#book"><span class="mnav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span><span class="mnav-text">اتصل بنا</span><svg class="mnav-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></a></li>
+    </ul>
+    <a href="#book" class="mnav-cta">احجز موعدك الآن</a>
+    <div class="mnav-contact">
+      <a href="tel:+966112027500"><span class="mnav-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span dir="ltr">0112027500</span></a>
+      <a href="https://wa.me/966112027500?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D9%81%D9%8A%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA%20%D8%A7%D9%84%D9%81%D8%A7%D8%B1%D8%A7%D8%A8%D9%8A" target="_blank" rel="noopener"><span class="mnav-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></span>واتساب</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero hero--magazine">
+    <div class="hmag-frame">
+      <div class="hmag-book" id="hmagBook" data-pages='["assets/img/hero_desktop/banner-09.jpg", "assets/img/hero_desktop/banner-10.jpg", "assets/img/hero_desktop/banner-11.jpg", "assets/img/hero_desktop/banner-12.jpg", "assets/img/hero_desktop/banner-21.jpg", "assets/img/hero_desktop/banner-31.jpg", "assets/img/hero_desktop/banner-32.jpg", "assets/img/hero_desktop/banner-33.jpg", "assets/img/hero_desktop/banner-34.jpg", "assets/img/hero_desktop/banner-35.jpg"]' data-pages-mobile='["assets/img/hero_mobile/mobile-01.jpg", "assets/img/hero_mobile/mobile-02.jpg", "assets/img/hero_mobile/mobile-03.jpg", "assets/img/hero_mobile/mobile-04.jpg", "assets/img/hero_mobile/mobile-05.jpg", "assets/img/hero_mobile/mobile-06.jpg", "assets/img/hero_mobile/mobile-07.jpg", "assets/img/hero_mobile/mobile-08.jpg", "assets/img/hero_mobile/mobile-09.jpg", "assets/img/hero_mobile/mobile-10.jpg"]'>
+        <div class="hmag-half hmag-half--l"></div>
+        <div class="hmag-half hmag-half--r"></div>
+        <div class="hmag-leaf">
+          <div class="hmag-leaf-face hmag-leaf-front"></div>
+          <div class="hmag-leaf-face hmag-leaf-back"></div>
+        </div>
+        <div class="hmag-spine"></div>
+      </div>
+      <div class="hmag-controls">
+        <button class="pb-btn" id="hmagPrev" aria-label="السابق">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="pb-counter">
+          <span class="pb-counter-current" id="hmagCurrent">1</span>
+          <span class="pb-counter-sep">/</span>
+          <span class="pb-counter-total" id="hmagTotal"></span>
+        </div>
+        <button class="pb-btn" id="hmagNext" aria-label="التالي">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form (بين الهيرو و About) -->
+  <section class="lead-section" id="book">
+    <div class="lead-wrap">
+
+      <!-- معلومات: يمين -->
+      <aside class="lead-info">
+        <div class="lead-eyebrow"><span class="eyebrow-line"></span>احجز موعدك</div>
+        <h2 class="lead-heading">احجز استشارتك الآن</h2>
+        <p class="lead-lead">املأ بياناتك وسيتواصل معك فريقنا لتأكيد موعدك في أقرب فرع إليك.</p>
+        <ul class="lead-perks">
+          <li><span class="lead-perk-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span>الكشف مجاني مع العروض</li>
+          <li><span class="lead-perk-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span>تقسيط العلاج عبر تابي وتمارا</li>
+          <li><span class="lead-perk-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span>العروض متاحة في فروع الرياض والمدينة المنورة والدمام وخميس مشيط</li>
+        </ul>
+        <div class="lead-contact">
+          <a href="tel:+966112027500"><span class="lead-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span dir="ltr">0112027500</span></a>
+          <a href="mailto:info@farabiclinics.com"><span class="lead-contact-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span><span dir="ltr">info@farabiclinics.com</span></a>
+        </div>
+      </aside>
+
+      <!-- الفورم: شمال -->
+      <form class="lead-card" id="leadForm" novalidate>
+        <div class="lead-card-head">
+          <span class="lead-card-badge" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 15l2 2 4-4"/></svg></span>
+          <h3>بيانات الحجز</h3>
+        </div>
+
+        <div class="lead-grid">
+          <div class="lead-field">
+            <label for="leadName">الاسم <span class="lead-req">*</span></label>
+            <div class="lead-control"><span class="lead-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+              <input type="text" id="leadName" name="name" placeholder="أدخل اسمك" autocomplete="name" required>
+            </div>
+            <span class="lead-error">من فضلك اكتب اسمك</span>
+          </div>
+          <div class="lead-field">
+            <label for="leadEmail">البريد الإلكتروني</label>
+            <div class="lead-control"><span class="lead-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>
+              <input type="email" id="leadEmail" name="email" placeholder="أدخل بريدك الإلكتروني" autocomplete="email" dir="rtl">
+            </div>
+            <span class="lead-error">البريد الإلكتروني غير صحيح</span>
+          </div>
+        </div>
+
+        <div class="lead-field">
+          <span class="lead-label" id="leadRegionLbl">المنطقة</span>
+          <div class="lead-regions" role="radiogroup" aria-labelledby="leadRegionLbl">
+            <label class="lead-region"><input type="radio" name="region" value="riyadh" checked><span>الرياض</span></label>
+            <label class="lead-region"><input type="radio" name="region" value="madinah"><span>المدينة المنورة</span></label>
+            <label class="lead-region"><input type="radio" name="region" value="dammam"><span>الدمام</span></label>
+            <label class="lead-region"><input type="radio" name="region" value="khamis"><span>خميس مشيط</span></label>
+          </div>
+        </div>
+
+        <div class="lead-grid">
+          <div class="lead-field">
+            <label for="leadBranch">الفرع <span class="lead-req">*</span></label>
+            <div class="lead-control lead-select"><span class="lead-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <select id="leadBranch" name="branch" required>
+                <option value="" disabled selected>اختر الفرع</option>
+              </select>
+            </div>
+            <span class="lead-hint">أسماء الفروع توضيحية للمعاينة</span>
+            <span class="lead-error">من فضلك اختر الفرع</span>
+          </div>
+          <div class="lead-field">
+            <label for="leadService">الخدمة <span class="lead-req">*</span></label>
+            <div class="lead-control lead-select"><span class="lead-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5.5C10.5 4 8.6 3.5 7 4 4.5 4.8 4 7.5 4.6 10c.5 2 1 3.6 1.4 6 .4 2.6.9 4.5 2.1 4.5 1.4 0 1.5-3 2.4-5 .4-.9.9-1 1.5-1s1.1.1 1.5 1c.9 2 1 5 2.4 5 1.2 0 1.7-1.9 2.1-4.5.4-2.4.9-4 1.4-6 .6-2.5.1-5.2-2.4-6-1.6-.5-3.5 0-5 1.5z"/></svg></span>
+              <select id="leadService" name="service" required>
+                <option value="" disabled selected>اختر الخدمة</option>
+                <option>طب الأسنان</option>
+                <option>الجلدية والتجميل</option>
+                <option>إزالة الشعر بالليزر</option>
+              </select>
+            </div>
+            <span class="lead-error">من فضلك اختر الخدمة</span>
+          </div>
+        </div>
+
+        <div class="lead-field">
+          <label for="leadPhone">رقم الهاتف <span class="lead-req">*</span></label>
+          <div class="lead-phone" dir="ltr">
+            <span class="lead-flag" aria-hidden="true">السعودية</span>
+            <span class="lead-code">+966</span>
+            <input type="tel" id="leadPhone" name="phone" placeholder="5x xxx xxxx" inputmode="numeric" autocomplete="tel-national" maxlength="12" required>
+          </div>
+          <span class="lead-error">اكتب رقم جوال سعودي صحيح يبدأ بـ 5 (9 أرقام)</span>
+        </div>
+
+        <button type="submit" class="lead-submit"><span>تأكيد الحجز</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+        <p class="lead-privacy"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> بياناتك محفوظة ولن تُشارك مع أي جهة</p>
+        <p class="lead-success" role="status" hidden>شكراً لك! استلمنا طلبك وسنتواصل معك قريباً.</p>
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- Accordion Script -->
+  <script>
+    document.querySelectorAll('.acc-header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.acc-item');
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    });
+
+    // Counter Cards
+    const counters = document.querySelectorAll('.counter-num');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.dataset.target;
+          const duration = 1800;
+          const step = target / (duration / 16);
+          let current = 0;
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) { current = target; clearInterval(timer); }
+            el.textContent = Math.floor(current);
+          }, 16);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => observer.observe(c));
+  </script>
+
+  <!-- Splitting.js -->
+  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+  <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+
+  <!-- CountUp.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.8.0/countUp.umd.js"></script>
+
+  <svg style="display:none" aria-hidden="true">
+    <filter id="brand-tint" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="
+        0.231 0.453 0.088 0 0
+        0.251 0.493 0.096 0 0
+        0.245 0.481 0.093 0 0
+        0     0     0     1 0"/>
+    </filter>
+  </svg>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+
+        <!-- Left: Text -->
+        <div class="about-content">
+          <div class="about-eyebrow"><span class="eyebrow-line"></span>عن عيادات الفارابي</div>
+          <h2 class="about-title">
+            <span class="about-gray">أكثر من ثلاثة عقود</span><br>
+            <span class="about-highlight">من الثقة</span>
+          </h2>
+          <p class="about-desc">منذ عام 1990 وعيادات الفارابي ترسم الابتسامات في المملكة. نجمع بين خبرة الأطباء ودقة التقنيات الحديثة وراحة المريض، لنقدّم لك رعاية متكاملة تبدأ من الاستشارة الأولى وتستمر حتى المتابعة الأخيرة.</p>
+
+          <!-- Features Grid -->
+          <ul class="about-features">
+            <li>
+              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#164346" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <div class="feature-text">
+                <strong class="feature-title">أطباء بخبرات طويلة</strong>
+                <span class="feature-desc">نخبة من الاستشاريين والأخصائيين، بعضهم يرافق مرضاه في الفرع نفسه منذ عشرين عامًا.</span>
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#164346" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+              <div class="feature-text">
+                <strong class="feature-title">تقنيات تشخيص وعلاج حديثة</strong>
+                <span class="feature-desc">أشعة ثلاثية الأبعاد، ومجهر جراحي لعلاج الجذور، وأجهزة ليزر متقدمة في أقسام الجلدية.</span>
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#164346" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <div class="feature-text">
+                <strong class="feature-title">فرع قريب منك</strong>
+                <span class="feature-desc">29 فرعًا موزعة على أحياء الرياض والمدينة المنورة والقطيف وخميس مشيط.</span>
+              </div>
+            </li>
+            <li>
+              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#164346" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+              <div class="feature-text">
+                <strong class="feature-title">خيارات دفع مرنة</strong>
+                <span class="feature-desc">إمكانية تقسيط قيمة العلاج عبر تابي وتمارا وفق الشروط المعتمدة.</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="about-btns">
+            <a href="#book" class="btn-about-primary">ابدأ باستشارتك</a>
+          </div>
+        </div>
+
+        <!-- Right: Mosaic -->
+        <div class="about-mosaic">
+          <div class="smoke-overlay" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mosaic-grid">
+            <div class="mosaic-item mi-offer mi-1">
+              <img class="offer-bg" src="assets/img/hero_mobile/mobile-06.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="offer-img" src="assets/img/hero_mobile/mobile-06.jpg" alt="عرض" loading="lazy">
+            </div>
+            <div class="mosaic-item mi-offer mi-color-1">
+              <img class="offer-bg" src="assets/img/hero_mobile/mobile-07.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="offer-img" src="assets/img/hero_mobile/mobile-07.jpg" alt="عرض" loading="lazy">
+            </div>
+            <div class="mosaic-item mi-offer mi-2">
+              <img class="offer-bg" src="assets/img/hero_mobile/mobile-10.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="offer-img" src="assets/img/hero_mobile/mobile-10.jpg" alt="عرض" loading="lazy">
+            </div>
+            <div class="mosaic-item mi-offer mi-color-2">
+              <img class="offer-bg" src="assets/img/hero_mobile/mobile-08.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="offer-img" src="assets/img/hero_mobile/mobile-08.jpg" alt="عرض" loading="lazy">
+            </div>
+            <div class="mosaic-item mi-offer mi-3">
+              <img class="offer-bg" src="assets/img/hero_mobile/mobile-09.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="offer-img" src="assets/img/hero_mobile/mobile-09.jpg" alt="عرض" loading="lazy">
+            </div>
+            <div class="mosaic-item mi-offer mi-4">
+              <img class="offer-bg" src="assets/img/hero_desktop/banner-31.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="offer-img" src="assets/img/hero_desktop/banner-31.jpg" alt="عرض" loading="lazy">
+            </div>
+            <div class="mosaic-item mi-offer mi-color-3">
+              <img class="offer-bg" src="assets/img/hero_desktop/banner-35.jpg" alt="" aria-hidden="true" loading="lazy">
+              <img class="offer-img" src="assets/img/hero_desktop/banner-35.jpg" alt="عرض" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+
+  <script>
+    /* ══════════════════════════════════════
+       SPLITTING.JS — Split Hero Title
+    ══════════════════════════════════════ */
+    Splitting();
+
+    /* ══════════════════════════════════════
+       GSAP SETUP
+    ══════════════════════════════════════ */
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ── 1. Navbar Reveal ── */
+    const navTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    navTl
+      .from('.logo-img', { y: -40, opacity: 0, duration: 0.7, clearProps: 'all' })
+      .from('.nav-links li', { y: -30, opacity: 0, duration: 0.5, stagger: 0.07, clearProps: 'all' }, '-=0.3')
+      .from('.btn-book',  { y: -30, opacity: 0, duration: 0.5, scale: 0.9, clearProps: 'all' }, '-=0.3');
+
+    
+
+  </script>
+
+
+
+  <!-- ── Section Scroll Reveal Animations ── -->
+  <script>
+  (function () {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const isRTL = document.documentElement.dir === 'rtl';
+    const xIn   = isRTL ? 50 : -50;
+    const xOut  = isRTL ? -50 : 50;
+
+    function onEnter(trigger, fn, start) {
+      const el = document.querySelector(trigger);
+      if (!el) return;
+      ScrollTrigger.create({
+        trigger: el,
+        start: start || 'top 82%',
+        once: true,
+        onEnter: fn
+      });
+    }
+
+    /* ── ABOUT ── */
+    onEnter('.about', () => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', clearProps: 'all' } });
+      tl.from('.about-eyebrow',     { opacity: 0, x: xIn,  duration: 0.65 })
+        .from('.about-title',       { opacity: 0, y: 35,   duration: 0.65 }, '-=0.35')
+        .from('.about .about-desc',   { opacity: 0, y: 28,   duration: 0.55 }, '-=0.35')
+        .from('.about-features li', { opacity: 0, y: 28,   stagger: 0.09, duration: 0.5 }, '-=0.3')
+        .from('.about .about-btns', { opacity: 0, y: 22,   duration: 0.5 }, '-=0.2')
+        .from('.about-mosaic',      { opacity: 0, x: xOut, duration: 0.85, ease: 'power2.out' }, '<0.2');
+    });
+
+    /* ── SERVICES ── */
+    onEnter('.services', () => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', clearProps: 'all' } });
+      tl.from('.services-header',  { opacity: 0, y: 35,   duration: 0.65 })
+        .from('.service-card',     { opacity: 0, y: 45, scale: 0.94, stagger: 0.1, duration: 0.55, ease: 'back.out(1.2)' }, '-=0.25');
+    });
+
+    /* ── BEFORE & AFTER ── */
+    onEnter('.ba-section', () => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', clearProps: 'all' } });
+      tl.from('.ba-header', { opacity: 0, y: 35, duration: 0.65 })
+        .from('.ba-card',   { opacity: 0, y: 45, stagger: 0.12, duration: 0.6 }, '-=0.25');
+    });
+
+    /* ── TESTIMONIALS ── */
+    onEnter('#testimonials', () => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out', clearProps: 'all' } });
+      tl.from('.testi-header',    { opacity: 0, y: 35,  duration: 0.65 })
+        .from('.testi-cta-side', { opacity: 0, x: xIn, duration: 0.75 }, '-=0.25');
+    }, 'top 75%');
+
+    /* ── BADGES ── */
+    onEnter('.badges-bar', () => {
+      gsap.from('.badge-card, .badge-iso', {
+        opacity: 0, y: 30, scale: 0.92,
+        stagger: 0.15, duration: 0.6,
+        ease: 'back.out(1.2)', clearProps: 'all'
+      });
+    });
+
+    /* ── FOOTER ── */
+    onEnter('.site-footer', () => {
+      gsap.from('.footer-col', {
+        opacity: 0, y: 30,
+        stagger: 0.12, duration: 0.6,
+        ease: 'power3.out', clearProps: 'all'
+      });
+    });
+
+  })();
+  </script>
+
+
+
+
+  <script>
+  /* ── Hamburger menu (< 500px) ── */
+  (function() {
+    var btn     = document.getElementById('hamburgerBtn');
+    var overlay = document.getElementById('mobileNavOverlay');
+    if (!btn || !overlay) return;
+
+    function closeMenu() {
+      overlay.classList.remove('is-open');
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function() {
+      var nav = document.querySelector('.navbar');
+      if (nav) overlay.style.setProperty('--mnav-top', Math.round(nav.getBoundingClientRect().bottom + 8) + 'px');
+      var open = overlay.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+
+    overlay.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeMenu);
+    });
+
+    /* close on outside tap */
+    document.addEventListener('click', function(e) {
+      if (!btn.contains(e.target) && !overlay.contains(e.target)) closeMenu();
+    });
+  })();
+  </script>
+
+<script>
+/* ── Dropdown toggle on arrow button only ── */
+(function(){
+  document.querySelectorAll('.nav-has-drop').forEach(function(item){
+    var btn = item.querySelector('.drop-toggle');
+    if(!btn) return;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = item.classList.contains('drop-open');
+      document.querySelectorAll('.nav-has-drop').forEach(function(i){ i.classList.remove('drop-open'); });
+      if(!isOpen) item.classList.add('drop-open');
+    });
+  });
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.nav-has-drop')){
+      document.querySelectorAll('.nav-has-drop').forEach(function(i){ i.classList.remove('drop-open'); });
+    }
+  });
+})();
+</script>
+
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/966112027500?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%AD%D8%AC%D8%B2%20%D9%85%D9%88%D8%B9%D8%AF%20%D9%81%D9%8A%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA%20%D8%A7%D9%84%D9%81%D8%A7%D8%B1%D8%A7%D8%A8%D9%8A" class="wa-float wa-float--ar" target="_blank" rel="noopener" aria-label="واتساب" id="waFloatBtn">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('waFloatBtn');
+      if (!btn) return;
+      var aboutSection = document.querySelector('.about');
+      function updateWaBtn() {
+        if (!aboutSection) return;
+        var aboutBottom = aboutSection.getBoundingClientRect().bottom;
+        if (aboutBottom > window.innerHeight) {
+          btn.style.opacity = '0';
+          btn.style.pointerEvents = 'none';
+        } else {
+          btn.style.opacity = '1';
+          btn.style.pointerEvents = 'auto';
+        }
+      }
+      window.addEventListener('scroll', updateWaBtn, { passive: true });
+      updateWaBtn();
+    })();
+  </script>
+  <script>
+  /* ══════════════════════════════════════
+     Hero Magazine — تقليب البانرات زي صفحات المجلة
+     ديسكتوب: مجلة مفتوحة والبانر العريض على الصفحتين
+     تابلت والموبايل العريض (600px+): مجلة مفتوحة وكل صفحة عرض طولي | موبايل: صفحة واحدة
+  ══════════════════════════════════════ */
+  (() => {
+    const book = document.getElementById('hmagBook');
+    if (!book) return;
+
+    const desktopPages = JSON.parse(book.dataset.pages);
+    const mobilePages  = JSON.parse(book.dataset.pagesMobile);
+    const mobileMQ     = window.matchMedia('(max-width: 1023px)');
+    const phoneMQ      = window.matchMedia('(max-width: 599px)');
+    const isRTL   = document.documentElement.dir === 'rtl';
+    const halfL   = book.querySelector('.hmag-half--l');
+    const halfR   = book.querySelector('.hmag-half--r');
+    const leaf    = book.querySelector('.hmag-leaf');
+    const front   = leaf.querySelector('.hmag-leaf-front');
+    const back    = leaf.querySelector('.hmag-leaf-back');
+    const counter = document.getElementById('hmagCurrent');
+    const FLIP_MS = 900;
+    const AUTO_MS = 5000;
+
+    let pages   = [];
+    let single  = false;
+    let pair    = false;   /* تابلت: صفحتين مختلفتين جنب بعض */
+    let current = 0;
+    let busy    = false;
+    let timer   = null;
+
+    const bg = (el, src) => { el.style.backgroundImage = `url("${src}")`; };
+
+    /* في وضع التابلت: الصفحة اللي على كل نص لأول صفحة في الفردة */
+    const pageFor = (half, start) => pages[(start + ((half === 'r') === isRTL ? 0 : 1)) % pages.length];
+    const STEP = () => pair ? 2 : 1;
+    const showCounter = () => {
+      counter.textContent = Math.floor(current / STEP()) + 1;
+      document.getElementById('hmagTotal').textContent = Math.ceil(pages.length / STEP());
+    };
+
+    function setMode() {
+      single = phoneMQ.matches;
+      pair   = !single && mobileMQ.matches;
+      pages  = (single || pair) ? mobilePages : desktopPages;
+      book.classList.toggle('is-single', single);
+      book.classList.toggle('is-pair', pair);
+      pages.forEach(src => { const img = new Image(); img.src = src; });
+      current = Math.min(current, pages.length - 1);
+      if (pair) current -= current % 2;
+      bg(halfL, pair ? pageFor('l', current) : pages[current]);
+      bg(halfR, pair ? pageFor('r', current) : pages[current]);
+      showCounter();
+    }
+
+    function animate(from, to, done) {
+      leaf.style.transform = `rotateY(${from}deg)`;
+      void leaf.offsetWidth;
+      leaf.classList.add('is-flipping');
+      void leaf.offsetWidth;
+      leaf.style.transform = `rotateY(${to}deg)`;
+      setTimeout(() => {
+        done();
+        leaf.classList.remove('is-flipping');
+        leaf.style.transform = 'rotateY(0deg)';
+        busy = false;
+      }, FLIP_MS);
+    }
+
+    /* موبايل: الصفحة بتتلف حوالين الكعب (شمال في الإنجليزي، يمين في العربي) */
+    function flipSingle(dir, target) {
+      const away = isRTL ? 180 : -180;
+      leaf.className  = 'hmag-leaf on-single';
+      front.className = 'hmag-leaf-face hmag-leaf-front';
+      if (dir > 0) {
+        bg(front, pages[current]);
+        bg(halfL, pages[target]);
+        animate(0, away, () => {});
+      } else {
+        bg(front, pages[target]);
+        animate(away, 0, () => bg(halfL, pages[target]));
+      }
+    }
+
+    function flipSpread(dir, target) {
+      /* في العربي الصفحة الجاية بتتقلب من الشمال، في الإنجليزي من اليمين */
+      const side   = (dir > 0) !== isRTL ? 'r' : 'l';
+      const other  = side === 'r' ? 'l' : 'r';
+      const under  = side === 'r' ? halfR : halfL;
+      const facing = side === 'r' ? halfL : halfR;
+
+      leaf.className   = `hmag-leaf on-${side}`;
+      front.className  = `hmag-leaf-face hmag-leaf-front is-${side}`;
+      back.className   = `hmag-leaf-face hmag-leaf-back is-${other}`;
+      const pg = (half, start) => pair ? pageFor(half, start) : pages[start];
+      bg(front, pg(side, current));
+      bg(back,  pg(other, target));
+      bg(under, pg(side, target));
+      animate(0, side === 'r' ? -180 : 180, () => bg(facing, pg(other, target)));
+    }
+
+    function flip(dir) {
+      if (busy) return;
+      busy = true;
+      const target = (current + dir * STEP() + pages.length) % pages.length;
+      (single ? flipSingle : flipSpread)(dir, target);
+      current = target;
+      showCounter();
+    }
+
+    const startAuto = () => { clearInterval(timer); timer = setInterval(() => flip(1), AUTO_MS); };
+    const stopAuto  = () => clearInterval(timer);
+
+    document.getElementById('hmagNext').addEventListener('click', () => { flip(1);  startAuto(); });
+    document.getElementById('hmagPrev').addEventListener('click', () => { flip(-1); startAuto(); });
+    book.addEventListener('mouseenter', stopAuto);
+    book.addEventListener('mouseleave', startAuto);
+    [mobileMQ, phoneMQ].forEach(mq => mq.addEventListener('change', () => { if (!busy) setMode(); else setTimeout(setMode, FLIP_MS); }));
+    /* احتياطي: لو حجم الشاشة اتغيّر والشكل مش مناسب (مثلاً لفّ التابلت) */
+    let rt;
+    addEventListener('resize', () => {
+      clearTimeout(rt);
+      rt = setTimeout(() => {
+        const s = phoneMQ.matches, p = !s && mobileMQ.matches;
+        if (s !== single || p !== pair) { busy = false; setMode(); }
+      }, 250);
+    });
+
+    setMode();
+    startAuto();
+  })();
+  </script>
+  <script>
+  /* ══════════════════════════════════════
+     About mosaic — العرض بيكبر بهدوء عند الهوفر جوه إطار الصور بمقاسه الحقيقي
+     وباقي العروض بتفضل باينة تحته بس مموّهة
+  ══════════════════════════════════════ */
+  (() => {
+    /* ماوس: بيفتح بالهوفر | لمس (موبايل وتابلت): بيفتح بالضغط ويقفل بضغطة تانية */
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    const grid = document.querySelector('.mosaic-grid');
+    if (!grid) return;
+    const MS = 900;
+    let pop = null;
+
+    /* أكبر مستطيل بنسبة الصورة جوه مستطيل معيّن، في نصه */
+    function fitIn(box, ar) {
+      let w = box.width, h = w / ar;
+      if (h > box.height) { h = box.height; w = h * ar; }
+      return { left: box.left + (box.width - w) / 2, top: box.top + (box.height - h) / 2, width: w, height: h };
+    }
+
+    function place(el, r) {
+      el.style.left = r.left + 'px'; el.style.top = r.top + 'px';
+      el.style.width = r.width + 'px'; el.style.height = r.height + 'px';
+    }
+
+    function close() {
+      if (!pop) return;
+      const p = pop; pop = null;
+      grid.classList.remove('has-pop');
+      place(p.el, fitIn(p.cell.getBoundingClientRect(), p.ar));
+      p.el.classList.remove('is-open');
+      p.el.style.pointerEvents = 'none';
+      setTimeout(() => p.el.remove(), MS);
+    }
+
+    function open(cell) {
+      const img = cell.querySelector('.offer-img');
+      if (!img || !img.naturalWidth) return;
+      close();
+      const ar = img.naturalWidth / img.naturalHeight;
+      const el = document.createElement('div');
+      el.className = 'offer-pop';
+      el.innerHTML = `<img src="${img.currentSrc || img.src}" alt="${img.alt}">`;
+      place(el, fitIn(cell.getBoundingClientRect(), ar));
+      document.body.appendChild(el);
+      void el.offsetWidth;
+      el.classList.add('is-open');
+      grid.classList.add('has-pop');
+      place(el, fitIn(grid.getBoundingClientRect(), ar));
+      if (canHover) el.addEventListener('mouseleave', e => { if (!grid.contains(e.relatedTarget)) close(); });
+      else el.addEventListener('click', close);
+      pop = { el, cell, ar };
+    }
+
+    grid.querySelectorAll('.mosaic-item.mi-offer').forEach(cell => {
+      if (canHover) cell.addEventListener('mouseenter', () => { if (!pop || pop.cell !== cell) open(cell); });
+      else cell.addEventListener('click', () => { if (!pop || pop.cell !== cell) open(cell); else close(); });
+    });
+    if (canHover) grid.addEventListener('mouseleave', e => { if (!(pop && pop.el.contains(e.relatedTarget))) close(); });
+    else document.addEventListener('click', e => { if (pop && !grid.contains(e.target) && !pop.el.contains(e.target)) close(); });
+    addEventListener('scroll', close, { passive: true });
+    addEventListener('resize', close);
+  })();
+  </script>
+  <script>
+  /* ══════════════════════════════════════
+     About mosaic — حافة صور العروض على نفس خط إطار مجلة الهيرو (ديسكتوب)
+  ══════════════════════════════════════ */
+  (() => {
+    const mosaic = document.querySelector('.about-mosaic');
+    const frame  = document.querySelector('.hmag-frame');
+    if (!mosaic || !frame) return;
+    const inner = mosaic.parentElement;
+    const isRTL = document.documentElement.dir === 'rtl';
+    const side  = isRTL ? 'marginLeft' : 'marginRight';
+
+    /* مكان العنصر من غير ما يتأثر بأنيميشن الـ transform */
+    const absLeft = el => { let x = 0; for (; el; el = el.offsetParent) x += el.offsetLeft; return x; };
+
+    /* القيمة بتتحط على الأب: أنيميشن القسم بيمسح الـ inline styles بتاعة الصور (clearProps) */
+    function align() {
+      inner.classList.remove('mosaic-aligned', 'mosaic-stacked');
+      if (innerWidth < 961) {
+        /* القسم مترصوص تحت بعض: الصور تاخد نفس حافتي الإطار */
+        const fL = absLeft(frame), fR = fL + frame.offsetWidth;
+        const mL = absLeft(mosaic), mR = mL + mosaic.offsetWidth;
+        const cs = getComputedStyle(mosaic);
+        inner.style.setProperty('--mosaic-ml', (parseFloat(cs.marginLeft)  - (mL - fL)) + 'px');
+        inner.style.setProperty('--mosaic-mr', (parseFloat(cs.marginRight) - (fR - mR)) + 'px');
+        inner.classList.add('mosaic-stacked');
+        return;
+      }
+      const fL = absLeft(frame), fR = fL + frame.offsetWidth;
+      const mL = absLeft(mosaic), mR = mL + mosaic.offsetWidth;
+      const delta = isRTL ? mL - fL : fR - mR;
+      inner.style.setProperty('--mosaic-edge', (parseFloat(getComputedStyle(mosaic)[side]) - delta) + 'px');
+      inner.classList.add('mosaic-aligned');
+    }
+
+    align();
+    addEventListener('load', align);
+    addEventListener('resize', align);
+  })();
+  </script>
+  <script>
+  /* ══════════════════════════════════════
+     Contact Form — الفروع حسب المنطقة + تحقق بسيط
+     (الإرسال لسه مش متوصل بسيرفر: بيعرض رسالة شكر بس)
+  ══════════════════════════════════════ */
+  (() => {
+    const form = document.getElementById('leadForm');
+    if (!form) return;
+
+    /* أسماء توضيحية — تتبدل بالفروع الحقيقية */
+    const BRANCHES = {
+      riyadh:  ['فرع الرياض ١', 'فرع الرياض ٢'],
+      madinah: ['فرع المدينة المنورة ١', 'فرع المدينة المنورة ٢'],
+      dammam:  ['فرع الدمام ١', 'فرع الدمام ٢'],
+      khamis:  ['فرع خميس مشيط ١', 'فرع خميس مشيط ٢']
+    };
+    const branch  = form.querySelector('#leadBranch');
+    const phone   = form.querySelector('#leadPhone');
+    const success = form.querySelector('.lead-success');
+
+    function fillBranches() {
+      const region = form.querySelector('input[name="region"]:checked').value;
+      branch.innerHTML = '<option value="" disabled selected>اختر الفرع</option>' +
+        BRANCHES[region].map(b => `<option>${b}</option>`).join('');
+    }
+    form.querySelectorAll('input[name="region"]').forEach(r => r.addEventListener('change', fillBranches));
+    fillBranches();
+
+    /* أرقام بس، ومسافات للقراءة: 5x xxx xxxx */
+    phone.addEventListener('input', () => {
+      const d = phone.value.replace(/\D/g, '').replace(/^0+/, '').slice(0, 9);
+      phone.value = [d.slice(0, 2), d.slice(2, 5), d.slice(5)].filter(Boolean).join(' ');
+    });
+
+    const rules = {
+      leadName:    el => el.value.trim().length >= 2,
+      leadEmail:   el => !el.value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()),
+      leadBranch:  el => !!el.value,
+      leadService: el => !!el.value,
+      leadPhone:   el => /^5\d{8}$/.test(el.value.replace(/\D/g, ''))
+    };
+    const check = el => {
+      const ok = rules[el.id](el);
+      el.closest('.lead-field').classList.toggle('has-error', !ok);
+      return ok;
+    };
+    Object.keys(rules).forEach(id => {
+      const el = form.querySelector('#' + id);
+      el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'blur', () => check(el));
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const fields = Object.keys(rules).map(id => form.querySelector('#' + id));
+      const bad = fields.filter(el => !check(el));
+      if (bad.length) { bad[0].focus(); return; }
+      form.reset();
+      fillBranches();
+      success.hidden = false;
+      setTimeout(() => { success.hidden = true; }, 6000);
+    });
+  })();
+  </script>
+</body>
+</html>
