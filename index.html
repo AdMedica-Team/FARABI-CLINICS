@@ -4,38 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عيادات الفارابي | Farabi Clinics</title>
-<link rel="stylesheet" href="assets/css/style.css?v=147"/>
+<link rel="stylesheet" href="assets/css/style.css?v=150"/>
 <style>
   /* ── Dropdown ── */
   .nav-has-drop { position:relative; display:flex; align-items:center; gap:1px; }
   .nav-dropdown {
     display:none; position:absolute; top:calc(100% + 10px); right:0;
-    background:#EDF8F5; border-radius:14px; min-width:240px;
-    box-shadow:0 8px 32px rgba(30, 100, 82,0.14); border:1.5px solid rgba(22,67,70,0.18);
+    background:#F4EDDA; border-radius:14px; min-width:240px;
+    box-shadow:0 8px 32px rgba(140,112,70,0.14); border:1.5px solid rgba(74,53,37,0.18);
     z-index:9999; padding:8px 0; overflow:hidden;
   }
   .nav-has-drop:hover .nav-dropdown,
   .nav-has-drop:focus-within .nav-dropdown,
   .nav-has-drop.drop-open .nav-dropdown { display:block; }
   .nav-dropdown-header {
-    font-size:11px; font-weight:700; color:#164346; letter-spacing:1px;
-    padding:10px 18px 6px; border-bottom:1px solid rgba(22,67,70,0.15); margin-bottom:4px;
+    font-size:11px; font-weight:700; color:var(--text-color); letter-spacing:1px;
+    padding:10px 18px 6px; border-bottom:1px solid rgba(74,53,37,0.15); margin-bottom:4px;
   }
   .nav-dropdown a {
     display:block; padding:9px 18px; font-size:12px; font-weight:600;
-    color:#3a2e28; text-decoration:none; border-bottom:1px solid rgba(22,67,70,0.07);
+    color:var(--text-color); text-decoration:none; border-bottom:1px solid rgba(74,53,37,0.07);
     transition:background 0.2s, color 0.2s, padding-right 0.2s; position:relative;
   }
   .nav-dropdown a:last-child { border-bottom:none; }
-  .nav-dropdown a:hover { background:rgba(229,249,243,0.35); color:#164346; padding-right:22px; }
+  .nav-dropdown a:hover { background:rgba(244,237,218,0.35); color:var(--text-color); padding-right:22px; }
   .nav-dropdown a::before {
     content:''; position:absolute; right:10px; top:50%; transform:translateY(-50%);
-    width:4px; height:4px; border-radius:50%; background:#C3DAD3; transition:background 0.2s;
+    width:4px; height:4px; border-radius:50%; background:#E9D2B0; transition:background 0.2s;
   }
-  .nav-dropdown a:hover::before { background:#164346; }
+  .nav-dropdown a:hover::before { background:#4A3525; }
   .drop-toggle {
     background:none; border:none; cursor:pointer; font-size:11px;
-    color:#5d5e5c; padding:2px 3px; line-height:1; transition:transform 0.25s;
+    color:var(--text-muted); padding:2px 3px; line-height:1; transition:transform 0.25s;
   }
   .nav-has-drop.drop-open .drop-toggle { transform:rotate(180deg); }
   /* ── Hero — RTL: نص على اليمين في كل المقاسات من 530px لفوق ── */
@@ -84,7 +84,7 @@
 
   /* Separator: RTL gradient (gold on right → transparent on left) */
   .testi-cta-sep {
-    background: linear-gradient(to left, #164346, transparent);
+    background: linear-gradient(to left, #4A3525, transparent);
   }
 
   /* Quote block: RTL — quote mark sits on the right */
@@ -566,7 +566,6 @@
           <div class="lead-regions" role="radiogroup" aria-labelledby="leadRegionLbl">
             <label class="lead-region"><input type="radio" name="region" value="riyadh" checked><span>الرياض</span></label>
             <label class="lead-region"><input type="radio" name="region" value="madinah"><span>المدينة المنورة</span></label>
-            <label class="lead-region"><input type="radio" name="region" value="dammam"><span>الدمام</span></label>
             <label class="lead-region"><input type="radio" name="region" value="khamis"><span>خميس مشيط</span></label>
           </div>
         </div>
@@ -682,28 +681,28 @@
           <!-- Features Grid -->
           <ul class="about-features">
             <li>
-              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#164346" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#4A3525" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
               <div class="feature-text">
                 <strong class="feature-title">أطباء بخبرات طويلة</strong>
                 <span class="feature-desc">نخبة من الاستشاريين والأخصائيين، بعضهم يرافق مرضاه في الفرع نفسه منذ عشرين عامًا.</span>
               </div>
             </li>
             <li>
-              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#164346" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#4A3525" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
               <div class="feature-text">
                 <strong class="feature-title">تقنيات تشخيص وعلاج حديثة</strong>
                 <span class="feature-desc">أشعة ثلاثية الأبعاد، ومجهر جراحي لعلاج الجذور، وأجهزة ليزر متقدمة في أقسام الجلدية.</span>
               </div>
             </li>
             <li>
-              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#164346" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#4A3525" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
               <div class="feature-text">
                 <strong class="feature-title">فرع قريب منك</strong>
                 <span class="feature-desc">29 فرعًا موزعة على أحياء الرياض والمدينة المنورة والقطيف وخميس مشيط.</span>
               </div>
             </li>
             <li>
-              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#164346" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+              <span class="feature-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#4A3525" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
               <div class="feature-text">
                 <strong class="feature-title">خيارات دفع مرنة</strong>
                 <span class="feature-desc">إمكانية تقسيط قيمة العلاج عبر تابي وتمارا وفق الشروط المعتمدة.</span>
@@ -1190,23 +1189,106 @@
     const form = document.getElementById('leadForm');
     if (!form) return;
 
-    /* أسماء توضيحية — تتبدل بالفروع الحقيقية */
+    /* الرياض: الفروع الحقيقية | باقي المدن: أسماء توضيحية — تتبدل بالفروع الحقيقية */
     const BRANCHES = {
-      riyadh:  ['فرع الرياض ١', 'فرع الرياض ٢'],
-      madinah: ['فرع المدينة المنورة ١', 'فرع المدينة المنورة ٢'],
-      dammam:  ['فرع الدمام ١', 'فرع الدمام ٢'],
-      khamis:  ['فرع خميس مشيط ١', 'فرع خميس مشيط ٢']
+      riyadh:  [
+        'فرع الأبراج', 'فرع الأندلس', 'فرع العقيق', 'فرع العزيزية', 'فرع الدرعية',
+        'مجمع الحكيم الطبي', 'فرع الخليج', 'فرع المصيف', 'فرع المغرزات', 'فرع النخيل',
+        'مجمع العريجاء الطبي', 'فرع الوادي – مخرج 6', 'فرع اليرموك', 'فرع النسيم',
+        'فرع الدار البيضاء – الزهرة', 'فرع مخرج 24', 'فرع مخرج 28 – البديعة',
+        'فرع ضاحية لبن', 'الفرع الرئيسي', 'فرع طويق'
+      ],
+      madinah: ['فرع الأندلس', 'فرع الهجرة', 'فرع قباء – بسمة الفارابي', 'فرع ساري', 'فرع سلطانة – القبلتين'],
+      khamis:  ['فرع القطيف الرئيسي', 'فرع القطيف الجديد', 'فرع شمس الفارابي – عنك', 'فرع خميس مشيط']
+    };
+    /* خدمات كل فرع، مقسمة بالمدينة (فيه فروع بنفس الاسم في أكتر من مدينة)
+       الفرع اللي مش متسجل هنا بياخد الخدمات العامة */
+    const DEFAULT_SERVICES = ['طب الأسنان', 'الجلدية والتجميل', 'إزالة الشعر بالليزر'];
+    const DENTAL_FULL = [
+      'طب الأسنان العام', 'تقويم الأسنان', 'طب أسنان الأطفال', 'علاج اللثة وزراعة الأسنان',
+      'التركيبات والترميم', 'علاج الجذور والعصب', 'جراحة الفم والوجه والفكين', 'تجميل الأسنان'
+    ];
+    const BRANCH_SERVICES = {
+      riyadh: {
+        'فرع الأبراج':  DENTAL_FULL,
+        'فرع الأندلس': DENTAL_FULL,
+        'فرع المصيف':  DENTAL_FULL,
+        'فرع اليرموك': DENTAL_FULL,
+        'فرع الدار البيضاء – الزهرة': DENTAL_FULL,
+        'فرع مخرج 28 – البديعة': DENTAL_FULL,
+        'فرع ضاحية لبن': DENTAL_FULL,
+        'فرع العقيق':  DENTAL_FULL.filter(s => s !== 'تجميل الأسنان'),
+        'الفرع الرئيسي': DENTAL_FULL.filter(s => s !== 'تجميل الأسنان'),
+        'فرع العزيزية': DENTAL_FULL.filter(s => s !== 'علاج اللثة وزراعة الأسنان'),
+        'فرع المغرزات': DENTAL_FULL.filter(s => s !== 'جراحة الفم والوجه والفكين'),
+        'فرع الوادي – مخرج 6': DENTAL_FULL.filter(s => s !== 'طب الأسنان العام'),
+        'فرع طويق': DENTAL_FULL.filter(s => s !== 'علاج الجذور والعصب'),
+        'فرع مخرج 24': [...DENTAL_FULL.filter(s => s !== 'تجميل الأسنان'), 'الأشعة'],
+        'فرع الدرعية': [
+          'طب الأسنان العام', 'تقويم الأسنان', 'طب أسنان الأطفال', 'التركيبات والترميم',
+          'علاج الجذور والعصب', 'جراحة الفم والوجه والفكين', 'الجلدية والتجميل', 'النساء والولادة',
+          'الباطنة والقلب', 'العظام', 'الطب العام والطوارئ', 'طب العيون', 'الأشعة'
+        ],
+        'مجمع الحكيم الطبي': [
+          'طب الأسنان العام', 'النساء والولادة', 'الباطنة والقلب', 'الطب العام والطوارئ', 'الأشعة'
+        ],
+        'فرع الخليج': [
+          'طب الأسنان العام', 'تقويم الأسنان', 'طب أسنان الأطفال', 'علاج اللثة وزراعة الأسنان',
+          'التركيبات والترميم', 'علاج الجذور والعصب', 'تجميل الأسنان', 'الأشعة'
+        ],
+        'فرع النخيل': [
+          'طب الأسنان العام', 'تقويم الأسنان', 'طب أسنان الأطفال', 'علاج اللثة وزراعة الأسنان',
+          'جراحة الفم والوجه والفكين', 'الجلدية والتجميل'
+        ],
+        'مجمع العريجاء الطبي': [
+          'طب الأسنان العام', 'الجلدية والتجميل', 'النساء والولادة', 'طب الأسرة', 'الباطنة والقلب',
+          'العظام', 'الطب العام والطوارئ', 'طب العيون', 'الأنف والأذن والحنجرة', 'الأشعة'
+        ],
+        'فرع النسيم': [
+          'طب الأسنان العام', 'تقويم الأسنان', 'طب أسنان الأطفال', 'علاج اللثة وزراعة الأسنان',
+          'التركيبات والترميم', 'الجلدية والتجميل'
+        ]
+      },
+      madinah: {
+        'فرع الأندلس': DENTAL_FULL,
+        'فرع الهجرة':  DENTAL_FULL,
+        'فرع قباء – بسمة الفارابي': DENTAL_FULL,
+        'فرع ساري': DENTAL_FULL.filter(s => s !== 'جراحة الفم والوجه والفكين'),
+        'فرع سلطانة – القبلتين': [...DENTAL_FULL, 'الجلدية والتجميل']
+      },
+      khamis: {
+        'فرع القطيف الرئيسي': [
+          'طب الأسنان العام', 'تقويم الأسنان', 'طب أسنان الأطفال', 'جراحة الفم والوجه والفكين'
+        ],
+        'فرع القطيف الجديد': [
+          'طب الأسنان العام', 'تقويم الأسنان', 'التركيبات والترميم', 'جراحة الفم والوجه والفكين',
+          'تجميل الأسنان', 'الجلدية والتجميل'
+        ],
+        'فرع شمس الفارابي – عنك': DENTAL_FULL,
+        'فرع خميس مشيط': [
+          'طب الأسنان العام', 'تقويم الأسنان', 'جراحة الفم والوجه والفكين', 'طب الأسرة'
+        ]
+      }
     };
     const branch  = form.querySelector('#leadBranch');
+    const service = form.querySelector('#leadService');
     const phone   = form.querySelector('#leadPhone');
     const success = form.querySelector('.lead-success');
 
+    function fillServices() {
+      const region = form.querySelector('input[name="region"]:checked').value;
+      const list = BRANCH_SERVICES[region]?.[branch.value] || DEFAULT_SERVICES;
+      service.innerHTML = '<option value="" disabled selected>اختر الخدمة</option>' +
+        list.map(s => `<option>${s}</option>`).join('');
+    }
     function fillBranches() {
       const region = form.querySelector('input[name="region"]:checked').value;
       branch.innerHTML = '<option value="" disabled selected>اختر الفرع</option>' +
         BRANCHES[region].map(b => `<option>${b}</option>`).join('');
+      fillServices();
     }
     form.querySelectorAll('input[name="region"]').forEach(r => r.addEventListener('change', fillBranches));
+    branch.addEventListener('change', fillServices);
     fillBranches();
 
     /* أرقام بس، ومسافات للقراءة: 5x xxx xxxx */
